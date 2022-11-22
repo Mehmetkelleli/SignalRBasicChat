@@ -19,3 +19,8 @@ D:\myblog\signalrdersleri\signalrdersleri\obj\Debug\net6.0\refint\signalrdersler
 D:\myblog\signalrdersleri\signalrdersleri\obj\Debug\net6.0\signalrdersleri.pdb
 D:\myblog\signalrdersleri\signalrdersleri\obj\Debug\net6.0\signalrdersleri.genruntimeconfig.cache
 D:\myblog\signalrdersleri\signalrdersleri\obj\Debug\net6.0\ref\signalrdersleri.dll
+D:\myblog\signalrdersleri\signalrdersleri\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\myblog\signalrdersleri\signalrdersleri\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+D:\myblog\signalrdersleri\signalrdersleri\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\myblog\signalrdersleri\signalrdersleri\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\myblog\signalrdersleri\signalrdersleri\obj\Debug\net6.0\signalrdersleri.csproj.CopyComplete
