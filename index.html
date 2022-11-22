@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat</title>
+  <script
+  src="https://code.jquery.com/jquery-3.6.1.js"
+  integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+  crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.0/signalr.min.js" integrity="sha512-ZqjBuyHOJ5inr58y0trfRo8TgD0zC0WJROOUmgjAIA6iiqXxobgj3ZocloB2Wp9ov2+LB9UM09aiwI3MDpm5HA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    $(document).ready(()=>{
+      var connection = new signalR
+            .HubConnectionBuilder()
+            .withAutomaticReconnect()
+            .withUrl("http://localhost:5047/ChatHub").build();
+      Start();
+      connection.on("receive",message=>{
+
+      })
+      $("#send").click(()=>{
+        var value = $("#val").val();
+        var name = $("#name").val();
+        connection.invoke("SendMessage",value,name);
+      })
+      connection.on("receiveMessage",(message,name)=>{
+        $("#messages").append(name+" : "+message+"<br>");
+      })
+
+
+
+      connection.onreconnected(data=>{
+            $(durum).removeClass("alert-warning");
+            $(durum).addClass("alert-success");
+            $(durum).html("Connected")
+        })
+        connection.onreconnecting(error=>{
+            $(durum).removeClass("alert-success");
+            $(durum).addClass("alert-warning");
+            $(durum).html("Connecting...");
+        })
+        connection.onclose(data=>{
+            $(durum).removeClass("alert-success");
+            $(durum).html("Connect Failed")
+        })
+      async function Start(){
+        try {
+          await connection.start();
+          $(durum).removeClass("alert-warning");
+          $(durum).addClass("alert-success");
+          $(durum).html("Connected successfully");
+        } catch (error) {
+          $(durum).addClass("alert-danger");
+          $(durum).html("connecting");
+          Start();
+        }
+      }
+    })
+  </script>
+</head>
+<body>
+  <div id="durum" class="alert mt-2 mr-5 ml-5"></div>
+    <div class="container">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Messages</label>
+        <input type="text" class="form-control mb-2 mt-2" id="name" placeholder="Enter Name">
+        <input type="text" class="form-control" id="val" placeholder="Enter Message">
+      </div>
+      <button class="btn btn-success" id="send">Send</button>
+      <h3 class="mt-3">Messages</h3>
+      <hr>
+      <div id="messages"></div>
+    </div>
+</body>
+</html>
